@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CDA Recruit Simulator — encyclopédie de préparation aux entretiens techniques pour Concepteurs Développeurs d'Applications.">
+  <title>CDA Recruit Simulator</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#" id="logo-home" aria-label="CDA Recruit Simulator — accueil">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">CDA Recruit Simulator</span>
+          <span class="brand-tagline">Préparation aux entretiens techniques</span>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <button type="button" class="nav-btn is-active" data-view="home">Accueil</button>
+        <button type="button" class="nav-btn" data-view="catalog">Fiches</button>
+        <button type="button" class="nav-btn" data-view="categories">Catégories</button>
+        <button type="button" class="nav-btn" data-view="simulate">Simulation</button>
+        <button type="button" class="nav-btn" data-view="favorites">Favoris</button>
+      </nav>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Basculer le mode sombre" title="Mode sombre">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ACCUEIL -->
+    <section id="view-home" class="view is-visible" aria-labelledby="home-title">
+      <div class="hero">
+        <div class="hero-content">
+          <p class="hero-kicker">Encyclopédie CDA</p>
+          <h1 id="home-title">CDA Recruit Simulator</h1>
+          <p class="hero-lead">
+            La plus grande base documentaire francophone de préparation aux entretiens techniques
+            pour Concepteurs Développeurs d’Applications.
+          </p>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" data-view="catalog">Explorer les fiches</button>
+            <button type="button" class="btn btn-secondary" data-view="simulate">Lancer une simulation</button>
+          </div>
+        </div>
+        <div class="hero-stats" id="home-stats" aria-live="polite"></div>
+      </div>
+
+      <div class="home-grid">
+        <section class="panel" aria-labelledby="quick-search-title">
+          <h2 id="quick-search-title">Recherche rapide</h2>
+          <form id="home-search-form" class="search-form" role="search">
+            <label class="sr-only" for="home-search">Rechercher une notion, une techno, un mot-clé</label>
+            <input type="search" id="home-search" name="q" placeholder="Ex. Flexbox, JWT, SOLID, XSS…" autocomplete="off">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+          </form>
+        </section>
+
+        <section class="panel" aria-labelledby="featured-cats-title">
+          <h2 id="featured-cats-title">Parcourir par domaine</h2>
+          <div id="featured-categories" class="category-chips"></div>
+        </section>
+      </div>
+
+      <section class="panel panel-wide" aria-labelledby="how-title">
+        <h2 id="how-title">Comment utiliser ce guide</h2>
+        <ol class="how-list">
+          <li><strong>Rechercher</strong> une notion par mot-clé, technologie ou difficulté.</li>
+          <li><strong>Lire</strong> la fiche complète : réponse idéale, erreurs fréquentes, conseils recruteur.</li>
+          <li><strong>Simuler</strong> un entretien aléatoire pour vous entraîner à l’oral.</li>
+          <li><strong>Favoriser</strong> les fiches à revoir avant un vrai entretien.</li>
+        </ol>
+      </section>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section id="view-catalog" class="view" aria-labelledby="catalog-title" hidden>
+      <div class="view-header">
+        <h1 id="catalog-title">Fiches techniques</h1>
+        <p class="view-subtitle" id="catalog-count"></p>
+      </div>
+
+      <aside class="filters" aria-label="Filtres de recherche">
+        <div class="filter-group">
+          <label for="filter-search">Recherche plein texte</label>
+          <input type="search" id="filter-search" placeholder="Question, réponse, mot-clé…" autocomplete="off">
+        </div>
+        <div class="filter-group">
+          <label for="filter-categorie">Catégorie</label>
+          <select id="filter-categorie">
+            <option value="">Toutes</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-difficulte">Difficulté</label>
+          <select id="filter-difficulte">
+            <option value="">Toutes</option>
+            <option value="1">1 — Fondamental</option>
+            <option value="2">2 — Junior</option>
+            <option value="3">3 — Intermédiaire</option>
+            <option value="4">4 — Avancé</option>
+            <option value="5">5 — Expert</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-niveau">Niveau</label>
+          <select id="filter-niveau">
+            <option value="">Tous</option>
+            <option value="Junior">Junior</option>
+            <option value="Confirmé">Confirmé</option>
+            <option value="Senior">Senior</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-techno">Technologie</label>
+          <select id="filter-techno">
+            <option value="">Toutes</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-motcle">Mot-clé</label>
+          <select id="filter-motcle">
+            <option value="">Tous</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-ghost" id="reset-filters">Réinitialiser</button>
+      </aside>
+
+      <div id="catalog-list" class="fiche-list" role="list"></div>
+      <nav class="pagination" id="pagination" aria-label="Pagination des fiches"></nav>
+    </section>
+
+    <!-- CATÉGORIES -->
+    <section id="view-categories" class="view" aria-labelledby="categories-title" hidden>
+      <div class="view-header">
+        <h1 id="categories-title">Catégories</h1>
+        <p class="view-subtitle">Explorez les domaines couverts par le simulateur.</p>
+      </div>
+      <div id="categories-grid" class="categories-grid"></div>
+    </section>
+
+    <!-- DÉTAIL FICHE -->
+    <section id="view-detail" class="view" aria-labelledby="detail-title" hidden>
+      <button type="button" class="btn btn-ghost back-btn" id="back-btn">← Retour</button>
+      <article id="fiche-detail" class="fiche-detail"></article>
+    </section>
+
+    <!-- SIMULATION -->
+    <section id="view-simulate" class="view" aria-labelledby="simulate-title" hidden>
+      <div class="view-header">
+        <h1 id="simulate-title">Simulation d’entretien</h1>
+        <p class="view-subtitle">Tirez une question aléatoire et entraînez-vous à répondre à voix haute.</p>
+      </div>
+
+      <div class="sim-controls panel">
+        <div class="filter-group">
+          <label for="sim-categorie">Catégorie</label>
+          <select id="sim-categorie">
+            <option value="">Toutes</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="sim-difficulte">Difficulté max</label>
+          <select id="sim-difficulte">
+            <option value="5">Toutes</option>
+            <option value="2">Jusqu’à 2</option>
+            <option value="3">Jusqu’à 3</option>
+            <option value="4">Jusqu’à 4</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary" id="sim-draw">Tirer une question</button>
+      </div>
+
+      <div id="sim-card" class="sim-card panel" hidden>
+        <div class="sim-meta" id="sim-meta"></div>
+        <h2 id="sim-question"></h2>
+        <p class="sim-hint">Prenez le temps indiqué, puis révélez la correction.</p>
+        <div class="sim-actions">
+          <button type="button" class="btn btn-secondary" id="sim-reveal">Révéler la réponse</button>
+          <button type="button" class="btn btn-ghost" id="sim-next">Question suivante</button>
+          <button type="button" class="btn btn-ghost" id="sim-favorite">★ Favori</button>
+        </div>
+        <div id="sim-answer" class="sim-answer" hidden></div>
+      </div>
+    </section>
+
+    <!-- FAVORIS -->
+    <section id="view-favorites" class="view" aria-labelledby="favorites-title" hidden>
+      <div class="view-header">
+        <h1 id="favorites-title">Favoris</h1>
+        <p class="view-subtitle">Vos fiches à revoir avant un entretien.</p>
+      </div>
+      <div id="favorites-list" class="fiche-list"></div>
+      <p id="favorites-empty" class="empty-state" hidden>Aucun favori pour l’instant. Ajoutez des fiches depuis le détail ou la simulation.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>CDA Recruit Simulator</strong>   
+    </p>
+   </footer>
+
+  <script src="js/data/fiches.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
